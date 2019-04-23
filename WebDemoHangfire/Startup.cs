@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebDemoHangfire.Service.Implementation;
+using WebDemoHangfire.Service.Intefaces;
 
 namespace WebDemoHangfire
 {
@@ -26,8 +28,18 @@ namespace WebDemoHangfire
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHangfire(conf => conf.UseSqlServerStorage("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=hangfire;Integrated Security=true;"));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);      
+            services.AddHangfire(
+                    config =>
+                    {
+                        config.UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"));
+
+                        // console colorido
+                        config.UseColouredConsoleLogProvider();
+                    });
+
+            services.AddScoped<IJobToProcess, JobToProcess>();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

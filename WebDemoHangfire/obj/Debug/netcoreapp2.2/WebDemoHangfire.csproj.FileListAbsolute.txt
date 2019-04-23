@@ -12,3 +12,17 @@ G:\JACK\C# ASP NET Study\WebDemoHangfire\WebDemoHangfire\bin\Debug\netcoreapp2.2
 G:\JACK\C# ASP NET Study\WebDemoHangfire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.dll
 G:\JACK\C# ASP NET Study\WebDemoHangfire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.pdb
 G:\JACK\C# ASP NET Study\WebDemoHangfire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.csprojAssemblyReference.cache
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\bin\Debug\netcoreapp2.2\WebDemoHangfire.deps.json
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\bin\Debug\netcoreapp2.2\WebDemoHangfire.runtimeconfig.json
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\bin\Debug\netcoreapp2.2\WebDemoHangfire.runtimeconfig.dev.json
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\bin\Debug\netcoreapp2.2\WebDemoHangfire.dll
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\bin\Debug\netcoreapp2.2\WebDemoHangfire.pdb
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.csprojAssemblyReference.cache
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.csproj.CoreCompileInputs.cache
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.RazorAssemblyInfo.cache
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.RazorAssemblyInfo.cs
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.AssemblyInfoInputs.cache
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.AssemblyInfo.cs
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.RazorTargetAssemblyInfo.cache
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.dll
+G:\JACK\C# ASP NET Study\StartingWithHangFire\WebDemoHangfire\obj\Debug\netcoreapp2.2\WebDemoHangfire.pdb

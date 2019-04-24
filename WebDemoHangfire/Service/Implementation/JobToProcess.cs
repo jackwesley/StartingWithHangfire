@@ -2,25 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebDemoHangfire.Data;
+using WebDemoHangfire.Models;
 using WebDemoHangfire.Service.Intefaces;
 
 namespace WebDemoHangfire.Service.Implementation
 {
     public class JobToProcess : IJobToProcess
     {
-        public int CallMethod1(int a, int b)
+        private readonly IDatabase<User> _userRepository;
+        public JobToProcess(IDatabase<User> userRepository)
         {
-            return a + b;
+            _userRepository = userRepository;
         }
-
-        public string CallMethod2(string message)
+        public void InsertUser(string message)
         {
-            return ($"this is your message: {message} from CallMethod1");
-        }
+            var id = Guid.NewGuid();
+            var user = new User
+            {
+                Id = id,
+                Name = $"{id} + {message}",
+                Description = $"Usuario salvo pelo método: {message} às {DateTime.Now}"
+            };
 
-        public string CallMethod3(string message)
-        {
-            return ($"this is your message: {message} from CallMethod2");
+            _userRepository.Add(user);
         }
     }
 }

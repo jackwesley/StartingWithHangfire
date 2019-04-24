@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebDemoHangfire.Data;
+using WebDemoHangfire.Models;
 using WebDemoHangfire.Service.Implementation;
 using WebDemoHangfire.Service.Intefaces;
 
@@ -28,6 +31,12 @@ namespace WebDemoHangfire
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IDatabase<User>, UserRepository>();
+            services.AddDbContext<UserDbContext>(cfg =>
+            {               
+                cfg.UseSqlServer(Configuration.GetConnectionString("UserHFConnection"));
+            });
+
             services.AddHangfire(
                     config =>
                     {

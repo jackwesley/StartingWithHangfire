@@ -33,7 +33,7 @@ namespace WebDemoHangfire.Controllers
         {
             Console.WriteLine($"Request: {DateTime.Now}");
 
-            var jobFireForget = BackgroundJob.Enqueue<IJobToProcess>(job => job.CallMethod2($"Disparado o método Fire And Forget no momento: {DateTime.Now}"));
+            var jobFireForget = BackgroundJob.Enqueue<IJobToProcess>(job => job.InsertUser("FireAndForget"));
 
             return Ok("Job Criado com Sucesso");
         }
@@ -46,7 +46,7 @@ namespace WebDemoHangfire.Controllers
         public IActionResult JobDelayed()
         {
             Console.WriteLine($"Request: {DateTime.Now}");
-            var jobDelayed = BackgroundJob.Schedule<IJobToProcess>(job =>job.CallMethod3($"Chamada do método em forma JobDelayed disparado às: {DateTime.Now} e processado às: {DateTime.Now}"), TimeSpan.FromSeconds(30));
+            var jobDelayed = BackgroundJob.Schedule<IJobToProcess>(job => job.InsertUser($"JobDelayed"), TimeSpan.FromSeconds(30));
 
             ContinueWith(jobDelayed);
 
@@ -61,7 +61,7 @@ namespace WebDemoHangfire.Controllers
         {
             Console.WriteLine($"Request: {DateTime.Now}");
             //jobId é o id do serviço que o método aguardará para começar a ser executado.
-            BackgroundJob.ContinueJobWith<IJobToProcess>(jobId, job => job.CallMethod1(int.Parse(jobId), int.Parse(jobId)));
+            BackgroundJob.ContinueJobWith<IJobToProcess>(jobId, job => job.InsertUser("ContinueWith"));
 
             return "Job Criado com Sucesso";
         }
@@ -73,10 +73,8 @@ namespace WebDemoHangfire.Controllers
         [HttpGet]
         public IActionResult RecurringJobAddOrUpdate()
         {
-            Console.WriteLine($"Request: {DateTime.Now}");
-
             var rnd = new Random();
-            RecurringJob.AddOrUpdate<IJobToProcess>(job  => job.CallMethod1(rnd.Next(), rnd.Next()), Cron.Minutely);
+            RecurringJob.AddOrUpdate<IJobToProcess>(job => job.InsertUser("RecurringJobAddOrUpdate"), Cron.Minutely);
 
             return Ok("Job Criado com Sucesso");
         }

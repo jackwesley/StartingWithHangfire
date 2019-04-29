@@ -9,7 +9,7 @@ using WebDemoHangfire.Data;
 
 namespace WebDemoHangfire.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20190424001833_Initial")]
     partial class Initial
     {

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebDemoHangfire.Data;
+using WebDemoHangfire.Data.Interfaces;
 using WebDemoHangfire.Models;
 using WebDemoHangfire.Service.Intefaces;
 
@@ -10,8 +7,8 @@ namespace WebDemoHangfire.Service.Implementation
 {
     public class JobToProcess : IJobToProcess
     {
-        private readonly IDatabase<User> _userRepository;
-        public JobToProcess(IDatabase<User> userRepository)
+        private readonly IUserRepository _userRepository;
+        public JobToProcess(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

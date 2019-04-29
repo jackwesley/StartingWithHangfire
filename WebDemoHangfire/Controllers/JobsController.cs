@@ -10,7 +10,6 @@ using WebDemoHangfire.Service.Intefaces;
 namespace WebDemoHangfire.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class JobsController : ControllerBase
     {
         private readonly IJobToProcess _jobToProcess;
@@ -29,6 +28,7 @@ namespace WebDemoHangfire.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("FireAndForget")]
         public IActionResult FireAndForget()
         {
             Console.WriteLine($"Request: {DateTime.Now}");
@@ -43,6 +43,7 @@ namespace WebDemoHangfire.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("JobDelayed")]
         public IActionResult JobDelayed()
         {
             Console.WriteLine($"Request: {DateTime.Now}");
@@ -71,6 +72,7 @@ namespace WebDemoHangfire.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("RecurringJobAddOrUpdate")]
         public IActionResult RecurringJobAddOrUpdate()
         {
             var rnd = new Random();

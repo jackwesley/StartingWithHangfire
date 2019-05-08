@@ -20,7 +20,7 @@ namespace WebDemoHangfire.Controllers
         }
         public IActionResult Index()
         {
-            return Ok();
+            return Ok("Api Web HangFire runing...");
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace WebDemoHangfire.Controllers
         /// Continuations are executed when its parent Id has been finished
         /// </summary>
         /// <returns></returns>
-        public string ContinueWith(string jobId)
+        private string ContinueWith(string jobId)
         {
             Console.WriteLine($"Request: {DateTime.Now}");
             //jobId é o id do serviço que o método aguardará para começar a ser executado.

@@ -33,13 +33,19 @@ namespace WebDemoHangfire
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region BD
             //services.AddTransient<IRepositoryBase<User>, UserRepository>();
             //services.AddDbContext<UserDbContext>(cfg =>
             //{               
             //    cfg.UseSqlServer(Configuration.GetConnectionString("UserHFConnection"));
             //});
+            #endregion
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ApplicationDbContext>();
+            services.AddScoped<IJobToProcess, JobToProcess>();
+
+            #region HANGFIRE
             services.AddHangfire(
                     config =>
                     {
@@ -48,8 +54,7 @@ namespace WebDemoHangfire
                         // console colorido
                         config.UseColouredConsoleLogProvider();
                     });
-
-            services.AddScoped<IJobToProcess, JobToProcess>();
+            #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -67,8 +72,10 @@ namespace WebDemoHangfire
                 app.UseHsts();
             }
 
+            #region HANGFIRE
             app.UseHangfireServer();
             app.UseHangfireDashboard();
+            #endregion
 
             app.UseHttpsRedirection();
             app.UseMvc();

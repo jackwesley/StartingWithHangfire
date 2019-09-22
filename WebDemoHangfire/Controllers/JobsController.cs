@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +10,15 @@ namespace WebDemoHangfire.Controllers
     public class JobsController : ControllerBase
     {
         private readonly IJobToProcess _jobToProcess;
+        private readonly IBackgroundJobClient _backgroundJobs;
+        private readonly IRecurringJobManager _recurringJobs;
 
-        public JobsController(IJobToProcess jobToProcess)
+
+        public JobsController(IJobToProcess jobToProcess,
+                              IBackgroundJobClient backgroundJobs)
         {
             _jobToProcess = jobToProcess;
+            _backgroundJobs = backgroundJobs;
         }
         public IActionResult Index()
         {
@@ -33,8 +35,7 @@ namespace WebDemoHangfire.Controllers
         {
             Console.WriteLine($"Request: {DateTime.Now}");
 
-            var jobFireForget = BackgroundJob.Enqueue<IJobToProcess>(job => job.InsertUser("FireAndForget"));
-
+            var jobFireForget = _backgroundJobs.Enqueue<IJobToProcess>(job => job.InsertUser("FireAndForget"));
             return Ok("Job Criado com Sucesso");
         }
 
@@ -47,7 +48,9 @@ namespace WebDemoHangfire.Controllers
         public IActionResult JobDelayed()
         {
             Console.WriteLine($"Request: {DateTime.Now}");
-            var jobDelayed = BackgroundJob.Schedule<IJobToProcess>(job => job.InsertUser($"JobDelayed"), TimeSpan.FromSeconds(30));
+            var jobDelayed = _backgroundJobs.Schedule<IJobToProcess>(job => 
+                                                    job.InsertUser($"JobDelayed"), 
+                                                    TimeSpan.FromSeconds(30));
 
             ContinueWith(jobDelayed);
 
@@ -61,8 +64,9 @@ namespace WebDemoHangfire.Controllers
         private string ContinueWith(string jobId)
         {
             Console.WriteLine($"Request: {DateTime.Now}");
+
             //jobId é o id do serviço que o método aguardará para começar a ser executado.
-            BackgroundJob.ContinueJobWith<IJobToProcess>(jobId, job => job.InsertUser("ContinueWith"));
+            _backgroundJobs.ContinueJobWith<IJobToProcess>(jobId, job => job.InsertUser("ContinueWith"));
 
             return "Job Criado com Sucesso";
         }
@@ -75,8 +79,10 @@ namespace WebDemoHangfire.Controllers
         [Route("RecurringJobAddOrUpdate")]
         public IActionResult RecurringJobAddOrUpdate()
         {
-            var rnd = new Random();
-            RecurringJob.AddOrUpdate<IJobToProcess>(job => job.InsertUser("RecurringJobAddOrUpdate"), Cron.Minutely);
+
+            RecurringJob.AddOrUpdate<IJobToProcess>(job =>
+                                                job.InsertUser("RecurringJobAddOrUpdate"),
+                                                Cron.Minutely);
 
             return Ok("Job Criado com Sucesso");
         }

@@ -50,7 +50,7 @@ namespace WebDemoHangfire
                     config =>
                     {
                         config.UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"));
-
+                        
                         // console colorido
                         config.UseColouredConsoleLogProvider();
                     });
@@ -60,7 +60,7 @@ namespace WebDemoHangfire
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IBackgroundJobClient backgroundJobs, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -74,6 +74,7 @@ namespace WebDemoHangfire
 
             #region HANGFIRE
             app.UseHangfireServer();
+            //backgroundJobs.Create
             app.UseHangfireDashboard();
             #endregion
 

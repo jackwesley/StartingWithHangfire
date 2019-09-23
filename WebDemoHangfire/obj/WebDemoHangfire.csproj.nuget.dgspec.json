@@ -44,11 +44,15 @@
           "dependencies": {
             "HangFire": {
               "target": "Package",
-              "version": "[1.7.1, )"
+              "version": "[1.7.6, )"
+            },
+            "HangFire.Core": {
+              "target": "Package",
+              "version": "[1.7.6, )"
             },
             "HangFire.SqlServer": {
               "target": "Package",
-              "version": "[1.7.1, )"
+              "version": "[1.7.6, )"
             },
             "Microsoft.AspNetCore.App": {
               "suppressParent": "All",

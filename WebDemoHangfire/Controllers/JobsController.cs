@@ -10,9 +10,7 @@ namespace WebDemoHangfire.Controllers
     {
         private readonly IJobToProcess _jobToProcess;
         private readonly IBackgroundJobClient _backgroundJobs;
-        private readonly IRecurringJobManager _recurringJobs;
-
-
+        
         public JobsController(IJobToProcess jobToProcess,
                               IBackgroundJobClient backgroundJobs)
         {
@@ -78,10 +76,10 @@ namespace WebDemoHangfire.Controllers
         [Route("RecurringJobAddOrUpdate")]
         public IActionResult RecurringJobAddOrUpdate()
         {
-
-            RecurringJob.AddOrUpdate<IJobToProcess>(job =>
-                                                job.InsertUser("RecurringJobAddOrUpdate"),
-                                                Cron.Minutely);
+            RecurringJob.AddOrUpdate<IJobToProcess>(
+                                                methodCall: job => job.InsertUser("RecurringJobAddOrUpdate"),
+                                                cronExpression: Cron.Minutely,
+                                                queue: "fila_jack");
 
             return Ok("Job Criado com Sucesso");
         }

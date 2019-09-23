@@ -50,7 +50,7 @@ namespace WebDemoHangfire
                     config =>
                     {
                         config.UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"));
-                        
+
                         // console colorido
                         config.UseColouredConsoleLogProvider();
                     });
@@ -73,7 +73,14 @@ namespace WebDemoHangfire
             }
 
             #region HANGFIRE
-            app.UseHangfireServer();
+            app.UseHangfireServer(new BackgroundJobServerOptions
+            {
+                ServerName = String.Format("Jack_Server"),
+                WorkerCount = 4,
+                Queues = new[] { "fila_jack", "fila_wesley"}
+            });
+
+
             //backgroundJobs.Create
             app.UseHangfireDashboard();
             #endregion

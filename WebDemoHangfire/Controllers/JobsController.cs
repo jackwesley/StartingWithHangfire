@@ -34,6 +34,7 @@ namespace WebDemoHangfire.Controllers
 
             var jobFireForget = _backgroundJobs.Enqueue<IJobToProcess>(job => job.InsertUser("FireAndForget"));
             return Ok("Job Criado com Sucesso");
+
         }
 
         /// <summary>

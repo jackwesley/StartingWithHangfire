@@ -60,7 +60,7 @@ namespace WebDemoHangfire
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IBackgroundJobClient backgroundJobs, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -77,11 +77,9 @@ namespace WebDemoHangfire
             {
                 ServerName = String.Format("Jack_Server"),
                 WorkerCount = 4,
-                Queues = new[] { "fila_jack", "fila_wesley"}
+                Queues = new[] { "fila1", "fila2"}
             });
 
-
-            //backgroundJobs.Create
             app.UseHangfireDashboard();
             #endregion
 

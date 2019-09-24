@@ -1,5 +1,6 @@
 ﻿using System;
 using Hangfire;
+using Hangfire.States;
 using Microsoft.AspNetCore.Mvc;
 using WebDemoHangfire.Service.Intefaces;
 
@@ -32,9 +33,12 @@ namespace WebDemoHangfire.Controllers
         {
             Console.WriteLine($"Request: {DateTime.Now}");
 
+            _backgroundJobs.Create<IJobToProcess>(job => job.InsertUser("FireAndForget"), new EnqueuedState("fila1"));
+
             var jobFireForget = _backgroundJobs.Enqueue<IJobToProcess>(job => job.InsertUser("FireAndForget"));
             return Ok("Job Criado com Sucesso");
 
+            //Inserindo em uma fila específica.
         }
 
         /// <summary>
@@ -80,7 +84,7 @@ namespace WebDemoHangfire.Controllers
             RecurringJob.AddOrUpdate<IJobToProcess>(
                                                 methodCall: job => job.InsertUser("RecurringJobAddOrUpdate"),
                                                 cronExpression: Cron.Minutely,
-                                                queue: "fila_jack");
+                                                queue: "fila2");
 
             return Ok("Job Criado com Sucesso");
         }

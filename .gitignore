@@ -17,6 +17,7 @@ nupkg/
 *.userosscache
 *.sln.docstates
 *.ide-wal
+*.StartingWithHangFire\.vs\WebDemoHangfire\v16\Server\sqlite3
 
 # Build results
 [Dd]ebug/

@@ -33,12 +33,11 @@ namespace WebDemoHangfire.Controllers
         {
             Console.WriteLine($"Request: {DateTime.Now}");
 
+            //Inserindo em uma fila específica
             _backgroundJobs.Create<IJobToProcess>(job => job.InsertUser("FireAndForget"), new EnqueuedState("fila1"));
 
-            var jobFireForget = _backgroundJobs.Enqueue<IJobToProcess>(job => job.InsertUser("FireAndForget"));
+            //var jobFireForget = _backgroundJobs.Enqueue<IJobToProcess>(job => job.InsertUser("FireAndForget"));
             return Ok("Job Criado com Sucesso");
-
-            //Inserindo em uma fila específica.
         }
 
         /// <summary>
